@@ -31,9 +31,9 @@ Este comando se ejecutó desde root y su principal función es terminar un proce
 |------|------|------|
 | brk | Define en que segmento finaliza el programa | **addr** es un valor de memoria al cual se van a dirigir los datos, si es un valor razonable y el sistema tiene suficiente memoria el proceso se lleva a cabo. |  
 | mprotect | Cambia las protecciones de acceso a las que el proceso quiere acceder | **addr** es un valor de memoria al cual el proceso desea acceder.  **len** la longitud de memoria del sistema el rango al cual el proceso puede accder esta entre [addr, addr+len-1].  **prot** es la combinación de unas banderas de acceso a memoria.  |
-| fstat | lee las estadísticas/estado del archivo | **fd** es el descriptor de archivo que hace referencia al archivo del cual se retornará su estado.  **statbuf** define hacia donde irá la información retornada.  |
+| fstat | Lee las estadísticas/estado del archivo | **fd** es el descriptor de archivo que hace referencia al archivo del cual se retornará su estado.  **statbuf** define hacia donde irá la información retornada.  |
 | execve | Ejecuta el programa asociado | **filename** archivo al cual apunta donde se encuentra el programa a ejecutar.  **argv[]** un arreglo de argumentos de tipo String para que el programa sea ejecutado, por ejemplo argv[0] contiene el nombre del archivo que será ejecutado.  **envp[]** es un arreglo que contiene el ambiente del nuevo programa. |
-| arch_prtcl | cambia una arquitura específica para el proceso | **code** selecciona una subfunción que será aplicada a una dirección específica.  **addr** long sin signo al que se le van a aplicar las operaciones, dirección de memoria.  |
+| arch_prtcl | Cambia una arquitura específica para el proceso | **code** selecciona una subfunción que será aplicada a una dirección específica.  **addr** long sin signo al que se le van a aplicar las operaciones, dirección de memoria.  |
 
 **Llamadas al sistema de kill**  
 
