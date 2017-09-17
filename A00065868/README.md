@@ -43,9 +43,28 @@ Este comando se ejecutó desde root y su principal función es terminar un proce
 ![][3]
 
 
-2. Realice la compilación del código fuente adjunto y su ejecución empleando el aplicativo **strace**. Identifique las llamadas al sistema encargadas de enviar y recibir datos a través de la red. A partir de los manuales de Linux en Internet o del sistema operativo explique las llamadas al sistema encontradas y sus parámetros.
+2. Realice la compilación del código fuente adjunto y su ejecución empleando el aplicativo **strace**. Identifique las llamadas al sistema encargadas de enviar y recibir datos a través de la red. A partir de los manuales de Linux en Internet o del sistema operativo explique las llamadas al sistema encontradas y sus parámetros.  
+  
+Se compila y se ejecuta el código adjunto curl.c  
 
-**Nota:** Cuando compile programas tenga en cuenta que estos pueden necesitar la instalación de librerías para su compilación y ejecución.
+![][4]  
+![][5]  
+![][6]  
+
+Posteriormente con el aplicativo strace -c se observan todas las llamadas al sistema que ocurren con la ejecución del código  
+  
+ ![][7]  
+ ![][8]  
+   
+ Las llamadas al sistema que se encargan de enviar y recibir datos de la red son sendto y recvfrom respectivamente, socket solo sirve para establcer el canal de comunicación:
+
+| Syscall | Función | Parámetros  |
+|------|------|------|
+| sendto | Es usada para transmitir un mensaje a otro socket (la red, por ejemplo) | **sockfd** es el decriptor de archivo de el socket que se esta enviando. **message** apunta a un buffer que contiene el mensaje que va a ser enviado. **length** especifica el tamaño del mensaje que va a ser enviado [en bytes]. **flags** especifica el tipo de transmisión. |
+| recvfrom | Es usada para recibir los mensajes provenientes de un socket | **sockfd** es el decriptor de archivo de el socket por medio del cual se estan recibiendo datos. **buf** apunta a un buffer en el cual se almacenará el mensaje. **length** especifica el tamaño del buffer al cual se esta apuntando. [en bytes]. **flags** especifica el tipo de recepción del mensaje. |
+
+  
+![][9]
 
 **Debian**
 ```
@@ -70,3 +89,9 @@ El informe debe ser entregado en formato README.md y debe ser subido a un reposi
 [1]: killcommand.PNG
 [2]: killcommand_syscalls.PNG
 [3]: syscalls_killL.PNG
+[4]: ejecucioncurl1.PNG
+[5]: ejecucioncurl2.PNG
+[6]: ejecucioncurl3.PNG
+[7]: syscalls_curl.PNG
+[8]: syscalls_curl2.PNG
+[9]: syscalls_sendreceive.PNG
