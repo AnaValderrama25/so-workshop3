@@ -64,7 +64,9 @@ Posteriormente con el aplicativo strace -c se observan todas las llamadas al sis
 | recvfrom | Es usada para recibir los mensajes provenientes de un socket | **sockfd** es el decriptor de archivo de el socket por medio del cual se estan recibiendo datos. **buf** apunta a un buffer en el cual se almacenará el mensaje. **length** especifica el tamaño del buffer al cual se esta apuntando. [en bytes]. **flags** especifica el tipo de recepción del mensaje. |
 
   
-![][9]
+![][9]  
+  
+Por ejemplo, en este caso el identificador del socket establecido para enviar y recibir datos es 3, lo siguiente al 3 es el buffer del cual se están enviando y al cual se está destinando los datos, el **mensaje enviado** tiene un tamaño de 50 bytes y el **mensaje recibido** un tamaño de 16384. 
 
 **Debian**
 ```
@@ -86,12 +88,12 @@ El informe debe ser entregado en formato README.md y debe ser subido a un reposi
 * http://man7.org/linux/man-pages/man2/syscalls.2.html  
 * https://jvns.ca/blog/2014/09/18/you-can-be-a-kernel-hacker/
 
-[1]: killcommand.PNG
-[2]: killcommand_syscalls.PNG
-[3]: syscalls_killL.PNG
-[4]: ejecucioncurl1.PNG
-[5]: ejecucioncurl2.PNG
-[6]: ejecucioncurl3.PNG
-[7]: syscalls_curl.PNG
-[8]: syscalls_curl2.PNG
-[9]: syscalls_sendreceive.PNG
+[1]: images/killcommand.PNG
+[2]: images/killcommand_syscalls.PNG
+[3]: images/syscalls_killL.PNG
+[4]: images/ejecucioncurl1.PNG
+[5]: images/ejecucioncurl2.PNG
+[6]: images/ejecucioncurl3.PNG
+[7]: images/syscalls_curl.PNG
+[8]: images/syscalls_curl2.PNG
+[9]: images/syscalls_sendreceive.PNG
