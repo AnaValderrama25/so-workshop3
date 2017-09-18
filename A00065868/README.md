@@ -2,8 +2,9 @@
 **Universidad ICESI**  
 **Curso:** Sistemas Operativos  
 **Docente:** Daniel Barragán C.  
-**Estudiante:** Ana Valderrama V.
+**Estudiante:** Ana Valderrama V.  
 **Código:** A00065868  
+**Git url:** https://github.com/AnaValderrama25/so-workshop3/tree/A00065868/workshop3/A00065868  
 **Tema:** Llamadas al sistema (syscalls)  
 **Correo:** daniel.barragan at correo.icesi.edu.co
 
