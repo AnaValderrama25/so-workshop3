@@ -24,17 +24,17 @@ El tercer taller del curso sistemas operativos trata sobre las llamadas al siste
 
 1. Empleando el aplicativo **strace** obtenga 5 llamadas al sistema para uno o varios comandos de linux. Explique por qué los comandos seleccionados emplean las llamadas al sistema encontradas, para ello debe emplear los manuales de Linux en Internet o del sistema operativo (comando **man**). Debe incluir la explicación de los parámetros que reciben las llamadas al sistema encontradas. Consigne capturas de pantalla donde muestre las llamadas al sistema obtenidas (sugerencia: emplear -etrace para filtrar los resultados)
 
-**Comando:** kill
+**Comando:** kill -L
 ![][1]  
 Este comando se ejecutó desde root y su principal función es terminar un proceso específico, recibe como parámetro el proceso que se desea detener (enviando una señal específica a él).  
   
 | Syscall | Uso en kill | Parámetros  |
 |------|------|------|
-| brk | Define en que segmento finaliza el programa | **addr** es un valor de memoria al cual se van a dirigir los datos, si es un valor razonable y el sistema tiene suficiente memoria el proceso se lleva a cabo. |  
-| mprotect | Cambia las protecciones de acceso a las que el proceso quiere acceder | **addr** es un valor de memoria al cual el proceso desea acceder.  **len** la longitud de memoria del sistema el rango al cual el proceso puede accder esta entre [addr, addr+len-1].  **prot** es la combinación de unas banderas de acceso a memoria.  |
-| fstat | Lee las estadísticas/estado del archivo | **fd** es el descriptor de archivo que hace referencia al archivo del cual se retornará su estado.  **statbuf** define hacia donde irá la información retornada.  |
-| execve | Ejecuta el programa asociado | **filename** archivo al cual apunta donde se encuentra el programa a ejecutar.  **argv[]** un arreglo de argumentos de tipo String para que el programa sea ejecutado, por ejemplo argv[0] contiene el nombre del archivo que será ejecutado.  **envp[]** es un arreglo que contiene el ambiente del nuevo programa. |
-| arch_prtcl | Cambia una arquitura específica para el proceso | **code** selecciona una subfunción que será aplicada a una dirección específica.  **addr** long sin signo al que se le van a aplicar las operaciones, dirección de memoria.  |
+| brk | Define en que segmento finaliza el programa, en este caso es NULL para retornar el valor actual sobre el cual kill esta siendo ejecutado. | **addr** es un valor de memoria al cual se van a dirigir los datos, si es un valor razonable y el sistema tiene suficiente memoria el proceso se lleva a cabo. |  
+| mprotect | Cambia las protecciones de acceso a las que el proceso quiere acceder, kill lo emplea aquí porque necesita acceder a la memoria para listar las señales. En este caso esta la bandera de PROT_READ lo que significa que el proceso kill puede leer la memoria. Tiene el valor de la dirección de memoria a la cual el proceso kill esta accediendo (eje: 0x605000) y el rango al cual tiene permiso de acceder (eje: 4096).  | **addr** es un valor de memoria al cual el proceso desea acceder.  **len** la longitud de memoria del sistema el rango al cual el proceso puede accder esta entre [addr, addr+len-1].  **prot** es la combinación de unas banderas de acceso a memoria.  |
+| fstat | Lee las estadísticas/estado del archivo, en este caso el tamaño y el modo en como kill esta obteniendo las señales para listarlas.| **fd** es el descriptor de archivo que hace referencia al archivo del cual se retornará su estado.  **statbuf** define hacia donde irá la información retornada.  |
+| execve | Ejecuta el programa asociado, por eso muestra de donde se obtiene kill ("/bin/kill"), y contiene como argumento cual es la funcion de kill que esta siendo empleada "-L". | **filename** archivo al cual apunta donde se encuentra el programa a ejecutar.  **argv[]** un arreglo de argumentos de tipo String para que el programa sea ejecutado, por ejemplo argv[0] contiene el nombre del archivo que será ejecutado.  **envp[]** es un arreglo que contiene el ambiente del nuevo programa. |
+| arch_prctl | Cambia una arquitura específica para el proceso, en este caso la subfunción empleada es ARCH_SET_FS que esta cambiando la base 64-bit por el registro FS en el llamado *kill -L*. Se realiza con éxito pues retorna 0.  | **code** selecciona una subfunción que será aplicada a una dirección específica.  **addr** long sin signo al que se le van a aplicar las operaciones, dirección de memoria.  |
 
 **Llamadas al sistema de kill**  
 
